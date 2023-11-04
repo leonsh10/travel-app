@@ -1,0 +1,47 @@
+  
+  .fill-height {
+    min-height: 100%;
+  }
+
+  .no-shadow{
+    box-shadow: none !important;
+  }
+
+  .form-logo {
+    width: 100%;
+    max-width: 344px; /* same as max-width of v-card */
+    max-height: 150px;
+    object-fit: contain;
+    margin-left:auto;
+    margin-right: auto;
+    display: flex;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .form-logo {
+      max-width: none;
+    }
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .w-100{
+    width: 100%;
+  }
+
+  .anchor-style {
+    color: red !important; /* You can use any shade of red you prefer */
+    padding: 0 !important; /* Remove padding to make it look less like a button */
+    min-width: 0 !important; /* Allow the button to shrink to the size of its content */
+    font-size: 14px !important; /* Adjust font size as needed */
+    cursor:pointer;
+  }
+
+  .anchor-style:hover{
+    text-decoration: underline !important;
+  }
