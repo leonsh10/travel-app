@@ -1,5 +1,5 @@
 <template>
-  <v-row >
+  <v-row style="margin: 0">
     <v-col cols="12" class="home-top-header">
       <HeaderHomepage style="padding-top: 25px" />
 
@@ -10,19 +10,33 @@
       <SearchHomepage />
     </v-col>
 
-    <MostVisitedTrips />
+    <v-row style="margin: 0; width: 100%">
+      <MostVisitedTrips />
+    </v-row>
+
+    <v-row style="margin: 0">
+      <UsersTestimonials />
+    </v-row>
+
+    <v-row class="homepage-listing-trips">
+      <ListingTripsHomepage />
+    </v-row>
   </v-row>
 </template>
 
 <script>
 import HeaderHomepage from "../components/HeaderHomepage.vue";
 import SearchHomepage from "../components/SearchHomepage.vue";
-import MostVisitedTrips from "../components/MostVisitedTrips.vue"
+import MostVisitedTrips from "../components/MostVisitedTrips.vue";
+import ListingTripsHomepage from "../components/ListingTripsHomepage.vue";
+import UsersTestimonials from "../components/UsersTestimonials.vue";
 export default {
   components: {
     HeaderHomepage,
     SearchHomepage,
-    MostVisitedTrips
+    MostVisitedTrips,
+    ListingTripsHomepage,
+    UsersTestimonials,
   },
 };
 </script>
@@ -31,8 +45,8 @@ export default {
 .home-top-header {
   background-image: url("../assets/homeBanner.jpg");
   background-size: cover;
-  background-position: center; 
-  height: 600px; 
+  background-position: center;
+  height: 600px;
   position: relative;
 }
 
@@ -46,7 +60,6 @@ export default {
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 
 .header-text-container {
   position: absolute;
@@ -64,5 +77,12 @@ export default {
   text-align: center;
   color: #fff;
   width: 100%;
+}
+
+.homepage-listing-trips {
+  width: 100%;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding-bottom: 20px;
 }
 </style>

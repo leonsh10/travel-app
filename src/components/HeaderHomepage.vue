@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative; z-index: 1">
+  <div style="position: relative; z-index: 10">
     <v-navigation-drawer
       app
       v-model="drawer"
@@ -9,6 +9,9 @@
       <v-list dense>
         <v-list-item @click="goTo('home')">
           <v-list-item-title>Home</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="goTo('trips')">
+          <v-list-item-title>Trips</v-list-item-title>
         </v-list-item>
         <v-list-item @click="goTo('about')">
           <v-list-item-title>About</v-list-item-title>
@@ -47,9 +50,11 @@
         <!-- Search bar and other items for larger screens -->
         <template v-if="!$vuetify.breakpoint.smAndDown">
           <v-spacer v-if="!$vuetify.breakpoint.smAndDown"></v-spacer>
+          <v-btn text class="white--text" @click="goTo('trips')">Trips</v-btn>
           <v-btn text class="white--text" @click="goTo('contact')"
             >Contact</v-btn
           >
+
           <v-btn text class="white--text" @click="goTo('about')">About</v-btn>
         </template>
         <v-menu offset-y>
@@ -81,6 +86,9 @@
             <v-list-item @click="goTo('profile')" v-if="isLoggedIn">
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item>
+            <v-list-item @click="goTo('admin')" v-if="isLoggedIn && isAdmin">
+              <v-list-item-title>Admin</v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </v-container>
@@ -98,6 +106,10 @@ export default {
   computed: {
     isLoggedIn() {
       return !!this.$store.state.auth.token;
+    },
+    isAdmin(){
+      return this.$store.state.auth.user.role == 'admin';
+
     },
     user() {
       return this.$store.state.auth.user;

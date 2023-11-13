@@ -33,6 +33,7 @@
           ></v-text-field>
 
           <v-spacer v-if="!$vuetify.breakpoint.smAndDown"></v-spacer>
+          <v-btn text class="white--text" @click="goTo('trips')">Trips</v-btn>
           <v-btn text class="white--text" @click="goTo('contact')">Contact</v-btn>
           <v-btn text class="white--text" @click="goTo('about')">About</v-btn>
 
@@ -49,8 +50,11 @@
             <v-list-item @click="logout" v-if="isLoggedIn">
               <v-list-item-title>Logout</v-list-item-title>
             </v-list-item>
-            <v-list-item @click="goTo('profile')" v-if="isLoggedIn">
+            <v-list-item @click="goTo('profile')" v-if="isLoggedIn ">
               <v-list-item-title>Profile</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="goTo('admin')" v-if="isLoggedIn && isAdmin ">
+              <v-list-item-title>Admin</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -82,6 +86,10 @@ export default {
   computed: {
     isLoggedIn() {
       return !!this.$store.state.auth.token;
+    },
+    isAdmin(){
+      return this.$store.state.auth.user.role == 'admin';
+
     },
     user() {
       return this.$store.state.auth.user

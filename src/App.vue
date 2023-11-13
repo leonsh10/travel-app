@@ -22,12 +22,12 @@ export default {
   computed: {
     showHeaderAndFooter() {
       const currentRouteName = this.$route.name;
-      return currentRouteName !== 'login' && currentRouteName !== 'register';
+      return currentRouteName !== 'login' && currentRouteName !== 'register' && currentRouteName !== 'admin';
     },
 
     showHeader(){
       const currentRouteName = this.$route.name;
-      return currentRouteName !== 'home'
+      return currentRouteName !== 'home' && currentRouteName !== 'trip';
     }
   },
 };

@@ -3,6 +3,10 @@ import Router from 'vue-router';
 import Home from '../views/Homepage.vue';
 import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
+import Admin from '../views/admin/Admin.vue';
+import Profile from '../views/Profile.vue';
+import TripsListing from '../views/TripsListing.vue';
+import SingleTrip from '../views/SingleTrip.vue';
 import Login from '../components/auth/Login.vue';
 import Register from '../components/auth/Register.vue';
 import store from '@/store/store.js'
@@ -39,11 +43,38 @@ const routes = [
     component: Register,
     meta: { guestOnly: true }
   },
+
+  {
+    path: '/trips',
+    name: 'trips',
+    component: TripsListing
+  },
+
+  {
+    path: '/trip/:id',
+    name: 'trip',
+    component: SingleTrip
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin,
+    meta: { requiresAdmin: true }
+  },
 ];
 
 const router = new Router({
   mode: 'history',
   routes,
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  }
 });
 
 router.beforeEach((to, from, next) => {
@@ -69,7 +100,9 @@ router.beforeEach((to, from, next) => {
     next('/unauthorized'); // Redirect or show unauthorized page
   } else if (guestOnly && isAuthenticated) {
     next('/'); // Redirect authenticated users trying to access guest-only pages to home
-  } else {
+  }
+   
+  else {
     next();
   }
 });

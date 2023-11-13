@@ -9,7 +9,7 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import store from './store/store';
 import Vuelidate from 'vuelidate';
-import 'swiper/css/swiper.css';
+
 Vue.use(Vuelidate);
 Vue.config.productionTip = false;
 

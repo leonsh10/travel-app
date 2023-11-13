@@ -145,6 +145,7 @@ export default {
             this.email = ''
             this.subject = ''
             this.message = ''
+            this.$toast.success('Form submitted successfully');
         }
         catch(error){
             if (error.response && error.response.data) {
