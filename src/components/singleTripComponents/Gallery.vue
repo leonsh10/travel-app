@@ -93,7 +93,7 @@ export default {
   methods: {
     getImagePath(imageName) {
       try {
-        return require(`@/assets/tours/${this.trip.city.toLowerCase()}/${imageName}`);
+        return require(`@/assets/tours/${this.trip.city.replace(/\s/g, '').toLowerCase()}/${imageName}`);
       } catch (e) {
         return e
       }

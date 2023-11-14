@@ -96,7 +96,7 @@ export default {
       // Check if trip and trip.city are defined
       if (this.trip && this.trip.city) {
         // Construct the image path and return it
-        return require(`@/assets/tours/${this.trip.city.toLowerCase()}/single-trip.jpg`);
+        return require(`@/assets/tours/${this.trip.city.replace(/\s/g, '').toLowerCase()}/single-trip.jpg`);
       }
       return ''
     }

@@ -41,7 +41,7 @@
       :trip="editableTrip"
     ></trip-preview-dialog>
 
-    <v-dialog v-model="showDeleteDialog" persistent max-width="300px">
+    <v-dialog v-model="showDeleteDialog" max-width="300px">
       <v-card>
         <v-card-title class="text-h5">Confirm Deletion</v-card-title>
         <v-card-text>Are you sure you want to delete this trip?</v-card-text>

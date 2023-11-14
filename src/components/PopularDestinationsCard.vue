@@ -36,7 +36,7 @@ export default {
     backgroundStyle() {
       let imageUrl;
       if (this.trip.city) {
-        imageUrl = require(`../assets/tours/${this.trip.city.toLowerCase()}/1.jpg`);
+        imageUrl = require(`../assets/tours/${this.trip.city.replace(/\s/g, '').toLowerCase()}/1.jpg`);
       }
       return {
         "background-image": `url(${imageUrl})`,
@@ -95,6 +95,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -webkit-text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
   text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
+  max-height: 22px;
+  min-height: 22px;
+  text-overflow: ellipsis;
+  display: inline-block;
+  white-space:nowrap;
+  overflow: hidden;
 }
 
 .destination-card-price {

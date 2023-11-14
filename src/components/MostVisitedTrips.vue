@@ -35,28 +35,10 @@
         :navigationEnabled="false"
         :centerMode="true"
       >
-        <slide>
-          <PopularDestionationsCard />
+        <slide v-for="trip in trips" :key="trip._id">
+          <PopularDestionationsCard :trip="trip" />
         </slide>
-        <slide>
-          <PopularDestionationsCard />
-        </slide>
-        <slide>
-          <PopularDestionationsCard />
-        </slide>
-        <slide>
-          <PopularDestionationsCard />
-        </slide>
-        <slide>
-          <PopularDestionationsCard />
-        </slide>
-        <slide>
-          <PopularDestionationsCard />
-        </slide>
-        <slide>
-          <PopularDestionationsCard />
-        </slide>
-        <!-- Repeat slides as necessary -->
+     
       </carousel>
     </v-row>
   </v-container>
@@ -65,12 +47,25 @@
 <script>
 import PopularDestionationsCard from "./PopularDestinationsCard.vue";
 import { Carousel, Slide } from "vue-carousel";
+import tripService from '../apiService/services/tripService';
+
 export default {
   components: {
     PopularDestionationsCard,
     Carousel,
     Slide,
   },
+  data() {
+      return {
+        trips: [],
+        filteredTrips: [],
+        priceRange: [0, 1000],
+      };
+    },
+    async mounted(){
+      const { data } = await tripService.getTrips();
+      this.trips = data;
+    },
 };
 </script>
 
@@ -82,6 +77,14 @@ export default {
 
 .vue-carousel-inner {
   width: 100% !important;
+}
+
+.VueCarousel{
+  width: 100%;
+}
+
+.VueCarousel-slide{
+  width: 33.3333%;
 }
 .container-bottom-padding {
   padding-bottom: 50px;

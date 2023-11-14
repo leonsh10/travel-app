@@ -7,31 +7,11 @@
       dui. Suspendisse laoreet velit at eros eleifend.
     </span>
     <v-row style="margin: 0" class="listing-products-homepage">
-      <v-col lg="3" xl="3" xs="2">
-        <PopularDestionationsCard />
+      <v-col lg="3" xl="3" xs="2" v-for="trip in trips" :key="trip._id">
+        <PopularDestionationsCard :trip="trip" />
       </v-col>
 
-      <v-col lg="3" xl="3" xs="2">
-        <PopularDestionationsCard />
-      </v-col>
-      <v-col lg="3" xl="3" xs="2">
-        <PopularDestionationsCard />
-      </v-col>
-      <v-col lg="3" xl="3" xs="2">
-        <PopularDestionationsCard />
-      </v-col>
-      <v-col lg="3" xl="3" xs="2">
-        <PopularDestionationsCard />
-      </v-col>
-      <v-col lg="3" xl="3" xs="2">
-        <PopularDestionationsCard />
-      </v-col>
-      <v-col lg="3" xl="3" xs="2">
-        <PopularDestionationsCard />
-      </v-col>
-      <v-col lg="3" xl="3" xs="2">
-        <PopularDestionationsCard />
-      </v-col>
+     
 
       <v-col cols="12" style="display: flex; justify-content: center">
         <v-col cols="3">
@@ -46,11 +26,24 @@
 
 <script>
 import PopularDestionationsCard from "./PopularDestinationsCard.vue";
+import tripService from '../apiService/services/tripService';
 
 export default {
   components: {
     PopularDestionationsCard,
   },
+  data() {
+      return {
+        // initial data
+        trips: [],
+        filteredTrips: [],
+        priceRange: [0, 1000],
+      };
+    },
+    async mounted(){
+      const { data } = await tripService.getTrips();
+      this.trips = data;
+    },
   methods:{
     goTo(route) {
       this.$router.push({ name: route });
