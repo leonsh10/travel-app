@@ -7,5 +7,5 @@ router.get('/all', tripController.getAllTrips);
 router.get('/singletrip/:id', tripController.getTrip);
 router.put('/update/:id', tripController.updateTrip);
 router.delete('/delete/:id', tripController.deleteTrip);
-
+router.get('/with-reservations', tripController.getTripsWithReservations);
 module.exports = router;

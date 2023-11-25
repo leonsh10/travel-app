@@ -4,7 +4,7 @@
       <HeaderHomepage style="padding-top: 25px" />
 
       <v-container class="header-text-container">
-        <v-text class="header-text"><i>"Journey Beyond the Horizon"</i></v-text>
+        <span class="header-text"><i>"Journey Beyond the Horizon"</i></span>
       </v-container>
 
       <SearchHomepage />

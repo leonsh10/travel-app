@@ -52,7 +52,7 @@
         </v-col>
 
         <v-col cols="3" md="4" class="test-col">
-          <Book />
+          <Book :trip="trip" />
         </v-col>
       </v-container>
     </v-row>

@@ -67,6 +67,17 @@ const routes = [
     component: Admin,
     meta: { requiresAdmin: true }
   },
+  {
+    path: '/payment-success',
+    name: 'PaymentSuccess',
+    component: () => import('@/components/PaymentSuccess.vue'),
+    props: (route) => ({ session_id: route.query.session_id }),
+  },
+  {
+    path: '/payment-cancelled',
+    name: 'PaymentCancelled',
+    component: () => import('@/components/PaymentCancelled.vue'),
+  },
 ];
 
 const router = new Router({

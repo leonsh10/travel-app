@@ -142,7 +142,7 @@ export default {
     },
     async getTrips() {
       const { data } = await tripService.getTrips();
-      this.trips = data;
+      this.trips = data.trips;
     },
 
     async deleteTrip(){

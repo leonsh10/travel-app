@@ -15,6 +15,13 @@ const userService = {
   },
   deleteUser(userId) { 
     return apiService.delete(`auth/user/${userId}`); 
+  },
+  getUserReservation(token, email) {
+    return apiService.get(`/user/all-reservations/${email}`, {
+      headers: {
+        'x-auth-token': token,
+      },
+    });
   }
 };
 

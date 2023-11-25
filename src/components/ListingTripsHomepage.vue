@@ -11,11 +11,14 @@
         <PopularDestionationsCard :trip="trip" />
       </v-col>
 
-     
-
       <v-col cols="12" style="display: flex; justify-content: center">
         <v-col cols="3">
-          <v-btn block rounded="xl" size="x-large" class="see-more-trips" @click="goTo('trips')"
+          <v-btn
+            block
+            rounded
+            size="x-large"
+            class="see-more-trips"
+            @click="goTo('trips')"
             >SEE ALL TRIPS</v-btn
           >
         </v-col>
@@ -26,29 +29,35 @@
 
 <script>
 import PopularDestionationsCard from "./PopularDestinationsCard.vue";
-import tripService from '../apiService/services/tripService';
+import tripService from "../apiService/services/tripService";
 
 export default {
   components: {
     PopularDestionationsCard,
   },
   data() {
-      return {
-        // initial data
-        trips: [],
-        filteredTrips: [],
-        priceRange: [0, 1000],
-      };
-    },
-    async mounted(){
-      const { data } = await tripService.getTrips();
-      this.trips = data;
-    },
-  methods:{
+    return {
+      trips: [],
+    };
+  },
+  async mounted() {
+  try {
+    const response = await tripService.getTrips();
+    if (response.data) {
+      const allTrips = response.data.trips;
+      const availableTrips = allTrips.filter((trip) => trip.availability > 0);
+      this.trips = availableTrips.slice(0, 8);
+    }
+  } catch (error) {
+    console.error('Error fetching trips:', error);
+  }
+},
+  methods: {
+  
     goTo(route) {
       this.$router.push({ name: route });
-    }
-  }
+    },
+  },
 };
 </script>
 

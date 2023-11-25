@@ -1,5 +1,5 @@
 <template>
-  <v-row class="destination-card-wrapper">
+  <v-row class="destination-card-wrapper" :class="{'soldout': trip.availability == 0}">
     <v-col
       cols="12"
       class="popular-destinations-header"
@@ -12,6 +12,7 @@
           <img src="../assets/usefulIcons/heart.png" />
         </span>
       </div>
+      <div v-if="listing && trip.availability == 0" class="sold-out-image"></div> <!-- Use a div for the image -->
     </v-col>
     <v-col cols="12" class="popular-destinations-infos">
       <span class="destination-card-country" @click="redirectToTrip">{{
@@ -20,7 +21,11 @@
       <span class="destination-card-description">{{
         trip.shortDescription
       }}</span>
-      <span class="destination-card-price">From ${{ trip.price }}</span>
+      <div class="mt-2">
+        <span v-if="trip.sale" class="destination-card-price mr-2"> ${{ calculateDiscountedPrice() }}</span>
+        <span class="destination-card-price" :class="{'onsale': trip.sale && trip.sale > 0}">${{ trip.price }}</span>
+      </div>
+
     </v-col>
   </v-row>
 </template>
@@ -31,6 +36,9 @@ export default {
     trip: {
       default: Object,
     },
+    listing: {
+      default: false
+    }
   },
   computed: {
     backgroundStyle() {
@@ -45,10 +53,18 @@ export default {
   },
   methods: {
     redirectToTrip() {
-      if (this.trip && this.trip._id) {
+      if (this.trip && this.trip._id && this.trip.availability) {
         this.$router.push(`/trip/${this.trip._id}`);
       }
     },
+
+    calculateDiscountedPrice() {
+    if (this.trip && this.trip.price && this.trip.sale) {
+      const discountedPrice = this.trip.price - (this.trip.price * this.trip.sale) / 100;
+      return discountedPrice.toFixed(2);
+    }
+    return null;
+  },
   
   },
 };
@@ -65,6 +81,11 @@ export default {
   max-height: 300px;
   background-size: cover;
   cursor:pointer;
+  position: relative;
+}
+
+.destination-card-wrapper.soldout * {
+  cursor:not-allowed !important;
 }
 
 .popular-destinations-infos {
@@ -82,8 +103,14 @@ export default {
   cursor:pointer;
 }
 
+
 .destination-card-country:hover{
   color: #585050;
+}
+
+.destination-card-price.onsale{
+  font-size: 16px;
+  text-decoration: line-through;
 }
 
 .destination-card-description {
@@ -104,7 +131,7 @@ export default {
 }
 
 .destination-card-price {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: #181818;
   margin-top: 16px;
@@ -155,5 +182,51 @@ export default {
 
 .wishlist-popular-destinations:hover {
   background: #ffe2e2;
+}
+
+.sold-out-label {
+  display: flex;
+  align-items: center; /* Center the text and image vertically */
+  padding-left: 10px; /* Add some spacing between image and text */
+  font-family: "Oswald", sans-serif;
+  font-size: 16px;
+  cursor: not-allowed; /* Make it clear that it's not clickable */
+  color: #fff; /* Text color */
+}
+
+.sold-out-image {
+  background-image: url('../assets/soldout.png'); /* Set the image as background */
+  background-size: contain; /* Adjust the size as needed */
+  background-repeat: no-repeat; /* Prevent image from repeating */
+  width: 20px; /* Set the width of the image */
+  height: 20px; /* Set the height of the image */
+  margin-right: 8px; /* Add some spacing between image and text */
+  opacity: 0.7; /* Adjust the opacity to make it lighter */
+}
+
+.sold-out-image {
+  background-image: url('../assets/soldout.png'); /* Set the image as background */
+  background-size: cover; /* Cover the entire header */
+  background-repeat: no-repeat; /* Prevent image from repeating */
+  width: 100%; /* Set the width to cover the entire header */
+  height: 100%; /* Set the height to cover the entire header */
+  position: absolute; /* Position it absolutely within the header */
+  top: 0;
+  left: 0;
+  opacity: 0.7; /* Adjust the opacity to make it lighter */
+}
+
+/* Remove the Sold Out label */
+.sold-out-image::after {
+  content: ""; /* Clear any content */
+}
+
+@media screen and (max-width: 1800px) {
+  .destination-card-country{
+    font-size: 22px;
+  }
+  .destination-card-price{
+    margin-top: 12px ;
+  }
 }
 </style>

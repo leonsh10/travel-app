@@ -4,28 +4,28 @@
       <v-col cols="4" class="center-flex-col">
         <img src="@/assets/homepageIcons/beach.svg" width="70" />
         <div class="text-column">
-          <v-text class="heading-text">Top Destinations</v-text>
-          <v-text class="subtext">Nulla pretium tincidunt felis, nec.</v-text>
+          <span class="heading-text">Top Destinations</span>
+          <span class="subtext">Nulla pretium tincidunt felis, nec.</span>
         </div>
       </v-col>
       <v-col cols="4" class="center-flex-col">
         <img src="@/assets/homepageIcons/wallet.svg" width="70" />
         <div class="text-column">
-          <v-text class="heading-text">The Best Prices</v-text>
-          <v-text class="subtext">Sollicitudin mauris lobortis in.</v-text>
+          <span class="heading-text">The Best Prices</span>
+          <span class="subtext">Sollicitudin mauris lobortis in.</span>
         </div>
       </v-col>
       <v-col cols="4" class="center-flex-col">
         <img src="@/assets/homepageIcons/suitcase.svg" width="70" />
         <div class="text-column">
-          <v-text class="heading-text">Amazing Services</v-text>
-          <v-text class="subtext">Nulla pretium tincidunt felis, nec.</v-text>
+          <span class="heading-text">Amazing Services</span>
+          <span class="subtext">Nulla pretium tincidunt felis, nec.</span>
         </div>
       </v-col>
     </v-row>
 
     <v-row class="center-flex-row">
-      <v-text class="info-text">SIMPLY AMAZING PLACES</v-text>
+      <span class="info-text">SIMPLY AMAZING PLACES</span>
       <h3 class="title-text">Popular Destinations</h3>
     </v-row>
 
@@ -58,14 +58,22 @@ export default {
   data() {
       return {
         trips: [],
-        filteredTrips: [],
-        priceRange: [0, 1000],
       };
     },
-    async mounted(){
-      const { data } = await tripService.getTrips();
-      this.trips = data;
-    },
+    async mounted() {
+    try {
+      // Use the new method to get trips with reservations
+      const response = await tripService.getTripsWithReservations();
+      if (response.data) {
+        const tripsWithReservations = response.data;
+        const availableTrips = tripsWithReservations.filter((trip) => trip.availability > 0);
+        this.trips = availableTrips;
+        console.log(this.trips)
+      }
+    } catch (error) {
+      console.error('Error fetching trips with reservations:', error);
+    }
+  },
 };
 </script>
 

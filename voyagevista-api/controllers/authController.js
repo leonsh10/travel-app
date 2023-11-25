@@ -1,7 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 exports.register = async (req, res) => {
   try {
     // Destructuring fields from request body
@@ -129,6 +128,8 @@ exports.editUserRole = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
+
+
 
 exports.deleteUser = async (req, res) => {
   try {

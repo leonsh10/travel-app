@@ -16,6 +16,7 @@ const TripSchema = new mongoose.Schema({
   sale: Number, // Percentage
   cardImage: { type: String, required: true },
   landingImage: { type: String, required: true },
+  effectivePrice: { type: Number },
   galleryImages: [String] // Array of image URLs
 });
 

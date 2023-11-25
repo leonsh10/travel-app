@@ -243,7 +243,7 @@ export default {
         galleryImagesFiles: [],
         // ...other properties to store the file names...
       },
-      categories: ["sea", "mountain"],
+      categories: ["Adventure", "Beach", "Sea", "Eco", "Luxury"],
       menuDeparture: false,
       menuTimeDeparture: false,
       menuReturn: false,

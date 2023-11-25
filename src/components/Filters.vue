@@ -77,12 +77,12 @@
 export default {
   data() {
     return {
-      priceRange: [0, 1000], // Use an array for the v-range-slider
+      priceRange: [0, 5000], // Use an array for the v-range-slider
       minPrice: 0, // Minimum value for the price range
       maxPrice: 5000, // Maximum value for price range
       category: null,
       month: null,
-      categories: ["Adventure", "Beach", "Cultural", "Eco", "Luxury"], // example categories
+      categories: ["Adventure", "Beach", "Sea", "Eco", "Luxury"], // example categories
       months: [
         "January",
         "February",
@@ -113,30 +113,65 @@ export default {
     },
   },
 
+  $route: {
+    immediate: true,
+    handler() {
+      this.setFiltersFromUrl();
+    }
+  },
+
+  created() {
+  this.setFiltersFromUrl();
+},
+
   methods: {
     syncPriceRange(newValue) {
-      // Directly emit the new value since v-range-slider provides an array
       this.updatePriceFilter(newValue);
     },
     updatePriceFilter(newValue) {
-      // You might want to use newValue or this.priceRange here
-      this.$emit("filter-by-price", newValue || this.priceRange);
+      console.log(newValue)
+      this.emitFilters();
     },
     updateCategoryFilter() {
-      this.$emit("filter-by-category", this.category);
+      this.emitFilters();
     },
     updateMonthFilter() {
-      this.$emit("filter-by-month", this.month);
+      this.emitFilters();
     },
     resetFilters() {
       this.priceRange = [this.minPrice, this.maxPrice];
       this.category = null;
       this.month = null;
-
-      // Emit an event if you need to notify the parent component
-      // to reset any external states or queries based on these filters
-      this.$emit('reset-filters');
+      this.emitFilters();
     },
+    emitFilters() {
+    this.$emit('filter-changed', {
+      priceRange: this.priceRange,
+      category: this.category,
+      month: this.month,
+    });
+    
+    // Emit an additional event for parent component to update the URL
+    this.$emit('update-url');
+  },
+
+    setFiltersFromUrl() {
+    const queryParams = this.$route.query;
+    
+    if (queryParams.priceRange) {
+      const [min, max] = queryParams.priceRange.split(',').map(Number);
+      this.priceRange = [min, max];
+    }
+    
+    if (queryParams.category) {
+      this.category = queryParams.category;
+    }
+    
+    if (queryParams.month) {
+      this.month = queryParams.month;
+    }
+  },
+
   },
 };
 </script>
