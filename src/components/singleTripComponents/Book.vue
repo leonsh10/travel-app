@@ -107,9 +107,10 @@ export default {
           /^\d{2}-\d{2}-\d{4}$/.test(v) || "Date must be in DD-MM-YYYY format",
       ],
       ticketsRules: [
-        (v) => !!v || "Number of tickets is required",
-        (v) => (v && v > 0) || "Must be at least one ticket",
-      ],
+  (v) => !!v || "Number of tickets is required",
+  (v) => (v && v > 0) || "Must be at least one ticket",
+  (v) => (v && v <= this.trip.availability) || `Cannot be more than ${this.trip.availability} tickets available`,
+],
     };
   },
   created() {

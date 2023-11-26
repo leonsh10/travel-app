@@ -33,7 +33,7 @@
             sm="6"
             md="4"
           >
-            <popular-destinations-card :trip="trip.tripId" />
+            <popular-destinations-card :trip="trip.tripId" :status="trip.status" />
           </v-col>
 
           <v-col v-if="!reservedTrips.length" cols="12">

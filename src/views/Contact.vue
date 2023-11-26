@@ -64,19 +64,19 @@
         <h3>Contact us</h3>
         <div class="info-item">
           <v-icon class="info-icon" color="white">mdi-map-marker</v-icon>
-          <strong>Address:</strong> 198 West 21th, Suite 721
+          <strong>Address:</strong> Rruga C , Prishtine
         </div>
         <div class="info-item">
           <v-icon class="info-icon" color="white">mdi-phone</v-icon>
-          <strong>Phone:</strong> +1235 2355 98
+          <strong>Phone:</strong> +383 44 123123
         </div>
         <div class="info-item">
           <v-icon class="info-icon" color="white">mdi-email</v-icon>
-          <strong>Email:</strong> info@yoursite.com
+          <strong>Email:</strong> info@voyagevista.com
         </div>
         <div class="info-item">
           <v-icon class="info-icon" color="white">mdi-web</v-icon>
-          <strong>Website:</strong> yoursite.com
+          <strong>Website:</strong> voyagevista.com
         </div>
       </v-col>
     </v-row>

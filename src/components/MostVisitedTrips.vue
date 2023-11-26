@@ -5,21 +5,21 @@
         <img src="@/assets/homepageIcons/beach.svg" width="70" />
         <div class="text-column">
           <span class="heading-text">Top Destinations</span>
-          <span class="subtext">Nulla pretium tincidunt felis, nec.</span>
+          <span class="subtext">"Discover iconic locations with unrivaled beauty and cultural richness."</span>
         </div>
       </v-col>
       <v-col cols="4" class="center-flex-col">
         <img src="@/assets/homepageIcons/wallet.svg" width="70" />
         <div class="text-column">
           <span class="heading-text">The Best Prices</span>
-          <span class="subtext">Sollicitudin mauris lobortis in.</span>
+          <span class="subtext">"Enjoy great travel deals that promise value and quality."</span>
         </div>
       </v-col>
       <v-col cols="4" class="center-flex-col">
         <img src="@/assets/homepageIcons/suitcase.svg" width="70" />
         <div class="text-column">
           <span class="heading-text">Amazing Services</span>
-          <span class="subtext">Nulla pretium tincidunt felis, nec.</span>
+          <span class="subtext">"Expect seamless journeys with our top-notch, personalized travel services."</span>
         </div>
       </v-col>
     </v-row>

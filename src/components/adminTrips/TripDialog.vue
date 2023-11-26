@@ -164,7 +164,6 @@
                 required
               ></v-text-field>
 
-              {{ trip }}
               <v-file-input
                 :rules="[rules.required]"
                 label="Card Image"

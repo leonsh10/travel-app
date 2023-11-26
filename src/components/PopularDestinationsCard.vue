@@ -25,6 +25,9 @@
         <span v-if="trip.sale" class="destination-card-price mr-2"> ${{ calculateDiscountedPrice() }}</span>
         <span class="destination-card-price" :class="{'onsale': trip.sale && trip.sale > 0}">${{ trip.price }}</span>
       </div>
+      <div class="mt-1" v-if="status">
+        <span>Status: {{ status.toUpperCase() }}</span>
+      </div>
 
     </v-col>
   </v-row>
@@ -38,6 +41,9 @@ export default {
     },
     listing: {
       default: false
+    },
+    status: {
+      default: ''
     }
   },
   computed: {

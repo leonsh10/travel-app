@@ -2,9 +2,9 @@
   <v-container>
     <span class="listing-trips-title">Find Your Perfect Tour</span>
     <span class="listing-trips-desc">
-      Nullam ac justo efficitur, tristique ligula a, pellentesque ipsum. Quisque
-      augue ipsum, vehicula et tellus nec, maximus viverra metus. In sed viverra
-      dui. Suspendisse laoreet velit at eros eleifend.
+      "Embark on a journey of discovery with our curated tours. Whether you're longing for the serene beaches of Bali, the rich history and culture of Italy, or the lush landscapes of Indonesia,
+       we have something special for you. Experience the vibrant traditions and breathtaking 
+      scenery of Thailand. Each destination is an opportunity to create memories that will last a lifetime. Take advantage of our special offers and book your dream tour today!"
     </span>
     <v-row style="margin: 0" class="listing-products-homepage">
       <v-col lg="3" xl="3" xs="2" v-for="trip in trips" :key="trip._id">
