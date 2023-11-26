@@ -4,7 +4,6 @@ const tripRoutes = require('./tripRoutes');
 const reservationRoutes = require('./reservationRoutes');
 const userRoutes = require('./userRoutes');
 const tourPlanRoutes = require('./tourPlanRoutes');
-// Import other routes here
 
 module.exports = {
   authRoutes,
@@ -13,5 +12,4 @@ module.exports = {
   reservationRoutes,
   userRoutes,
   tourPlanRoutes
-  // Export other routes here
 };

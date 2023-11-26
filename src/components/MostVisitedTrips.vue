@@ -62,7 +62,6 @@ export default {
     },
     async mounted() {
     try {
-      // Use the new method to get trips with reservations
       const response = await tripService.getTripsWithReservations();
       if (response.data) {
         const tripsWithReservations = response.data;

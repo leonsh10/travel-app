@@ -47,7 +47,7 @@
   </v-dialog>
 </template>
 <script>
-import tripService from "../../apiService/services/tripService"; // Import your actual service
+import tripService from "../../apiService/services/tripService";
 
 export default {
   props: {
@@ -76,7 +76,7 @@ export default {
     dialog(val) {
       this.$emit("input", val);
       if (val && !this.editing) {
-        this.initializeTrips(); // Call the method that initializes trips
+        this.initializeTrips();
       }
     },
     selectedTripId(newValue) {
@@ -90,7 +90,6 @@ export default {
       this.initializeTrips();
       setTimeout(() => {
         if (this.editing && this.tourPlanData) {
-          // Initialize the dialog with the data for editing
           this.tourPlan = this.tourPlanData;
           console.log(this.tourPlan);
           this.selectedTripId = {
@@ -98,7 +97,6 @@ export default {
             city: this.tourPlan.city
           }
         } else {
-          // Initialize the dialog for creating a new tour plan
           this.resetTourPlan();
           this.fetchTrips();
         }
@@ -130,7 +128,6 @@ export default {
         (trip) => trip._id === this.selectedTripId._id
       );
       if (this.selectedTrip) {
-        // Calculate the number of days
         const departureDate = new Date(this.selectedTrip.departureTime);
         const returnDate = new Date(this.selectedTrip.returnTime);
         const timeDiff = Math.abs(
@@ -138,7 +135,6 @@ export default {
         );
         this.numberOfDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-        // Prepare the days array
         this.tourPlan.days = Array.from(
           { length: this.numberOfDays },
           (_, index) => ({
@@ -165,14 +161,5 @@ export default {
       }
     },
   },
-  // created() {
-  //   if (this.editing && this.tourPlanData) {
-  //     this.tourPlan = this.tourPlanData;
-  //     console.log(this.tourPlan,this.tourPlanData)
-  //     this.selectedTripId = this.tourPlanData.tripId;
-  //     this.dialog = this.value;
-  //   }
-  //   this.initializeTrips(); // Initialize trips when the component is created
-  // },
 };
 </script>

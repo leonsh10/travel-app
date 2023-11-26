@@ -76,7 +76,6 @@ export default {
         require("@/assets/logoBgWhite.png"),
         require("@/assets/logoNoBg.png"),
         require("@/assets/logoText.png"),
-        // Paths to your images
       ],
       visible: false,
       index: 0,

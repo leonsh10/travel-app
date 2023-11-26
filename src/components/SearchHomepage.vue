@@ -72,7 +72,6 @@ export default {
   },
   methods: {
     search() {
-      // Construct query parameters based on the selections
       const queryParams = {};
 
       if (this.selectedMonth) {
@@ -87,7 +86,6 @@ export default {
         queryParams.category = this.selectedCategory;
       }
 
-      // Use the router to navigate to the /trips route with query parameters
       this.$router.push({ path: '/trips', query: queryParams });
     },
   },

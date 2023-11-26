@@ -12,7 +12,7 @@ exports.submit = async (req, res) => {
 
 exports.getAll = async (req, res) => {
   try {
-    const forms = await ContactForm.find(); // Use the find method to retrieve all documents
+    const forms = await ContactForm.find();
     res.status(200).json(forms);
   } catch (error) {
     res.status(500).json({ error: `Error fetching contact forms: ${error.message}` });

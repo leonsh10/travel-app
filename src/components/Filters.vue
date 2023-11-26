@@ -77,12 +77,12 @@
 export default {
   data() {
     return {
-      priceRange: [0, 5000], // Use an array for the v-range-slider
-      minPrice: 0, // Minimum value for the price range
-      maxPrice: 5000, // Maximum value for price range
+      priceRange: [0, 5000],
+      minPrice: 0, 
+      maxPrice: 5000, 
       category: null,
       month: null,
-      categories: ["Adventure", "Beach", "Sea", "Eco", "Luxury"], // example categories
+      categories: ["Adventure", "Beach", "Sea", "Eco", "Luxury"], 
       months: [
         "January",
         "February",
@@ -151,7 +151,6 @@ export default {
       month: this.month,
     });
     
-    // Emit an additional event for parent component to update the URL
     this.$emit('update-url');
   },
 

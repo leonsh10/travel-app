@@ -12,19 +12,18 @@
       <v-container class="footer-container">
         <span>Voyagevista / {{ trip.city }}</span>
         <div class="social-media">
-          <v-btn icon href="https://facebook.com/yourpage" target="_blank">
+          <v-btn icon href="https://facebook.com" target="_blank">
             <v-icon> mdi-facebook </v-icon>
           </v-btn>
-          <v-btn icon href="https://twitter.com/yourpage" target="_blank">
+          <v-btn icon href="https://twitter.com" target="_blank">
             <v-icon> mdi-twitter </v-icon>
           </v-btn>
-          <v-btn icon href="https://instagram.com/yourpage" target="_blank">
+          <v-btn icon href="https://instagram.com" target="_blank">
             <v-icon> mdi-instagram </v-icon>
           </v-btn>
-          <v-btn icon href="https://linkedin.com/in/yourpage" target="_blank">
+          <v-btn icon href="https://linkedin.com/in" target="_blank">
             <v-icon> mdi-linkedin </v-icon>
           </v-btn>
-          <!-- Add more icons as needed -->
         </div>
       </v-container>
     </v-col>
@@ -93,9 +92,7 @@ export default {
   }),
   computed: {
     tripImageSrc() {
-      // Check if trip and trip.city are defined
       if (this.trip && this.trip.city) {
-        // Construct the image path and return it
         return require(`@/assets/tours/${this.trip.city.replace(/\s/g, '').toLowerCase()}/single-trip.jpg`);
       }
       return ''

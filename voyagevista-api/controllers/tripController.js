@@ -1,14 +1,10 @@
 const Trip = require("../models/TripSchema");
-// const Reservation = require('../models/ReservationSchema');
-// POST - Create a new trip
 exports.createTrip = async (req, res) => {
   try {
-    // Calculate effectivePrice
-    const sale = req.body.sale || 0; // Default to 0 if not provided
+    const sale = req.body.sale || 0;
     const price = req.body.price;
     const effectivePrice = sale ? price * (1 - sale / 100) : price;
 
-    // Create a new trip object with effectivePrice
     const tripData = { ...req.body, effectivePrice };
     const newTrip = new Trip(tripData);
 
@@ -19,7 +15,6 @@ exports.createTrip = async (req, res) => {
   }
 };
 
-// GET - Retrieve all trips
 exports.getAllTrips = async (req, res) => {
   try {
     const { category, month, sort, page, limit, destination } = req.query;
@@ -30,9 +25,8 @@ exports.getAllTrips = async (req, res) => {
 
     let query = {};
 
-    // Filters
     if (minPrice !== undefined || maxPrice !== undefined) {
-      query.effectivePrice = {}; // Use effectivePrice
+      query.effectivePrice = {}; 
       if (minPrice !== undefined)
         query.effectivePrice.$gte = parseInt(minPrice);
       if (maxPrice !== undefined)
@@ -57,12 +51,10 @@ exports.getAllTrips = async (req, res) => {
     };
     if (month) {
       const monthNumber = monthsMap[month];
-      // Create a regex to search for that month in the departureTime
       const regexMonth = new RegExp(`-${monthNumber}-`);
       query.departureTime = { $regex: regexMonth, $options: "i" };
     }
 
-    // Sorting
     let sortQuery = {};
     if (sort) {
       const [sortField, sortOrder] = sort.split("-");
@@ -71,10 +63,9 @@ exports.getAllTrips = async (req, res) => {
     }
 
     if (destination) {
-      query.city = { $regex: destination, $options: "i" }; // Adjust the field if necessary
+      query.city = { $regex: destination, $options: "i" };
     }
 
-    // Pagination
     const pageNum = parseInt(page, 10) || 1;
     const pageSize = parseInt(limit, 10) || 10;
     const skip = (pageNum - 1) * pageSize;
@@ -84,7 +75,6 @@ exports.getAllTrips = async (req, res) => {
       .skip(skip)
       .limit(pageSize);
 
-    // Here you might want to also send the total count of documents to handle the pagination on the frontend
     const total = await Trip.countDocuments(query);
     const totalPages = Math.ceil(total / pageSize);
 
@@ -94,7 +84,6 @@ exports.getAllTrips = async (req, res) => {
   }
 };
 
-// GET - Retrieve a single trip by ID
 exports.getTrip = async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id);
@@ -109,19 +98,18 @@ exports.getTrip = async (req, res) => {
 
 exports.getTripsWithReservations = async (req, res) => {
   try {
-    // Use $lookup to find trips with reservations
     const tripsWithReservations = await Trip.aggregate([
       {
         $lookup: {
-          from: "reservations", // Name of the reservations collection
-          localField: "_id", // Field in the trips collection
-          foreignField: "tripId", // Field in the reservations collection that references trips
+          from: "reservations", 
+          localField: "_id", 
+          foreignField: "tripId",
           as: "reservations",
         },
       },
       {
         $match: {
-          reservations: { $exists: true, $ne: [] }, // Filter trips with reservations
+          reservations: { $exists: true, $ne: [] },
         },
       },
     ]);
@@ -132,7 +120,6 @@ exports.getTripsWithReservations = async (req, res) => {
   }
 };
 
-// PUT - Update a trip
 exports.updateTrip = async (req, res) => {
   try {
     if (req.body.price || req.body.sale) {
@@ -153,7 +140,6 @@ exports.updateTrip = async (req, res) => {
   }
 };
 
-// DELETE - Delete a trip
 exports.deleteTrip = async (req, res) => {
   try {
     const deletedTrip = await Trip.findByIdAndDelete(req.params.id);

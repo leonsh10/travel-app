@@ -1,19 +1,13 @@
 require('dotenv').config();
-const Reservation = require('../models/ReservationSchema'); // Replace with the actual path to the schema file
+const Reservation = require('../models/ReservationSchema');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 function calculateAmount({ effectivePrice, numberOfTickets }) {
-  // Calculate the base price using effectivePrice and the number of tickets
   const basePrice = effectivePrice * numberOfTickets;
 
-  // Calculate the tax amount (e.g., 18% of the base price)
-  const taxAmount = basePrice * 0.18; // 18% tax
+  const taxAmount = basePrice * 0.18;
 
-  // Calculate the final amount by adding the tax to the base price
   const finalAmount = basePrice + taxAmount;
-
-  // Convert to the smallest currency unit (e.g., cents for USD)
-  // Stripe requires amounts to be in the smallest currency unit
   const finalAmountInCents = Math.round(finalAmount * 100);
 
   return finalAmountInCents;
@@ -22,19 +16,15 @@ exports.createCheckoutSession = async (req, res) => {
   try {
       let { effectivePrice, numberOfTickets } = req.body;
 
-      // Convert to numbers
       effectivePrice = Number(effectivePrice);
       numberOfTickets = Number(numberOfTickets);
 
-      // Validate that the values are numbers and not NaN
       if (isNaN(effectivePrice) || isNaN(numberOfTickets)) {
           return res.status(400).json({ error: 'Invalid effectivePrice or numberOfTickets' });
       }
 
-      // Calculate the total amount using the effectivePrice
       const amount = calculateAmount({ effectivePrice, numberOfTickets });
 
-      // Create a Stripe checkout session
       const session = await stripe.checkout.sessions.create({
           payment_method_types: ['card'],
           line_items: [{
@@ -42,7 +32,6 @@ exports.createCheckoutSession = async (req, res) => {
                   currency: 'usd',
                   product_data: {
                       name: 'Tour Tickets',
-                      // Add other product details if necessary
                   },
                   unit_amount: amount,
               },
@@ -63,15 +52,11 @@ exports.createCheckoutSession = async (req, res) => {
     console.log('verify paymentttt');
     const { sessionId } = req.body;
     try {
-      // Use the Stripe SDK to retrieve the session
       const session = await stripe.checkout.sessions.retrieve(sessionId);
   
-      // Verify the session's payment status
       if (session.payment_status === 'paid') {
-        // Payment has been successful
         res.json({ success: true });
       } else {
-        // Payment was not successful
         res.json({ success: false });
       }
     } catch (error) {
@@ -82,11 +67,9 @@ exports.createCheckoutSession = async (req, res) => {
   exports.saveReservation = async (req, res) => {
     try {
       const Trip = require('../models/TripSchema');
-      // Destructure the reservation details from the request body
       const { name, email, phone, date, numberOfTickets, message, tripId } = req.body;
       console.log('save reservation called', req.body);
   
-      // Check if the trip is available
       const trip = await Trip.findById(tripId);
       if (!trip) {
           return res.status(404).json({ message: 'Trip not found' });
@@ -97,7 +80,6 @@ exports.createCheckoutSession = async (req, res) => {
         return res.status(400).json({ message: 'Not enough tickets available' });
       }
   
-      // Create a new reservation instance
       const reservation = new Reservation({
         tripId,
         name,
@@ -109,17 +91,12 @@ exports.createCheckoutSession = async (req, res) => {
         status: 'pending',
       });
   
-      // Update trip availability
       trip.availability -= numberOfTickets;
       await trip.save();
   
-      // Save the reservation to the database
       await reservation.save();
-  
-      // Send a response back to the frontend
       res.status(201).json({ message: 'Reservation saved successfully', reservation });
     } catch (error) {
-      // Handle errors, such as sending a response with an error message
       res.status(500).json({ message: 'Failed to save reservation', error: error.message });
     }
   };
@@ -163,7 +140,7 @@ exports.deleteReservation = async (req, res) => {
     if (!reservation) {
       return res.status(404).json({ message: 'Reservation not found' });
     }
-    res.status(204).json(); // No content to send back
+    res.status(204).json(); 
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -172,7 +149,7 @@ exports.deleteReservation = async (req, res) => {
 
 exports.updateReservationStatus = async (req, res) => {
     try {
-      const { status } = req.body; // Get the new status from the request body
+      const { status } = req.body; 
       const reservation = await Reservation.findByIdAndUpdate(req.params.id, { status }, { new: true });
   
       if (!reservation) {

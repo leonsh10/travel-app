@@ -123,11 +123,10 @@ export default {
       this.$router.push({ name: route });
     },
     login() {
-      // Here you would add your login logic
       this.goTo("login");
     },
     logout() {
-      this.$store.dispatch("logout", this.$router); // Assuming you have set up your logout action properly
+      this.$store.dispatch("logout", this.$router);
     },
   },
 };

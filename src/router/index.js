@@ -93,24 +93,22 @@ router.beforeEach((to, from, next) => {
   const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
   const guestOnly = to.matched.some(record => record.meta.guestOnly);
 
-  // Check localStorage for token and user role
   const tokenInLocalStorage = localStorage.getItem('token');
   const userInLocalStorage = JSON.parse(localStorage.getItem('user'));
   
   const isAuthenticated = tokenInLocalStorage;
   const isAdmin = userInLocalStorage && userInLocalStorage.role === 'admin';
 
-  // Update store based on localStorage if necessary
   if (tokenInLocalStorage && !store.state.token) {
     store.commit('SET_USER_DATA', { token: tokenInLocalStorage, user: userInLocalStorage });
   }
 
   if (requiresAuth && !isAuthenticated) {
-    next('/login'); // Redirect to login if not authenticated
+    next('/login'); 
   } else if (requiresAdmin && !isAdmin) {
-    next('/unauthorized'); // Redirect or show unauthorized page
+    next('/unauthorized');
   } else if (guestOnly && isAuthenticated) {
-    next('/'); // Redirect authenticated users trying to access guest-only pages to home
+    next('/'); 
   }
    
   else {

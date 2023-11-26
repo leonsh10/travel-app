@@ -51,7 +51,6 @@
 <script>
 import { required, email } from "vuelidate/lib/validators";
 import { validationMixin } from "vuelidate";
-// import userService from "@/apiService/services/userService";
 export default {
   mixins: [validationMixin],
   name: "Login",
@@ -93,7 +92,6 @@ export default {
           this.$router.push({ path: "/" });
         } catch (error) {
             console.log('error',error)
-          // Handle specific error messages based on the API response
           if (error.response && error.response.data) {
             if (error.response.data.message === "Invalid Credentials") {
               this.$toast.error("Your account does not exist.");
@@ -112,11 +110,9 @@ export default {
     },
     forgotPassword() {
       console.log("Forgot Password clicked");
-      // Handle forgot password logic here
     },
     registerNow() {
       console.log("Register Now clicked");
-      // Handle register logic here (e.g., navigate to register page)
       this.$router.push({ name: "register" });
     },
   },

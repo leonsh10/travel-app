@@ -2,7 +2,7 @@ import userService from '../../apiService/services/userService';
 import axios from "axios";
 
 const state = {
-  user: JSON.parse(localStorage.getItem('user')) || null, // Parse the stored string to get the user object
+  user: JSON.parse(localStorage.getItem('user')) || null, 
   token: localStorage.getItem('token') || '',
 };
 
@@ -11,14 +11,14 @@ const mutations = {
     state.user = userData.user;
     state.token = userData.token;
     localStorage.setItem('token', userData.token);
-    localStorage.setItem('user', JSON.stringify(userData.user)); // Store user data as a string
+    localStorage.setItem('user', JSON.stringify(userData.user)); 
     axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
   },
   CLEAR_USER_DATA(state) {
     state.user = null;
     state.token = '';
     localStorage.removeItem('token');
-    localStorage.removeItem('user'); // Remove user data
+    localStorage.removeItem('user'); 
     delete axios.defaults.headers.common['Authorization'];
   }
 };
@@ -43,18 +43,14 @@ const actions = {
       throw error.response.data;
     }
   },
-  logout({ commit }, router) {  // router is passed as a parameter
-    // Remove the user's token from localStorage
+  logout({ commit }, router) { 
     localStorage.removeItem('token');
     
-    // Clear the user data from the state
     commit('CLEAR_USER_DATA');
     
-    // Remove the Authorization header from future axios requests
     delete axios.defaults.headers.common['Authorization'];
     
-    // Optionally, redirect the user to the login page or another public page
-    if (router) router.push('/'); // Use the router passed as a parameter
+    if (router) router.push('/'); 
   }
 };
 

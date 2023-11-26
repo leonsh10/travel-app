@@ -77,7 +77,7 @@ export default {
         priceRange: [0, 5000],
         category: null,
         month: null,
-        destination: '', // Add this line
+        destination: '',
       },
     };
   },
@@ -121,7 +121,7 @@ export default {
     applyFilters(filters) {
       if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
       this.debounceTimeout = setTimeout(() => {
-        this.filters = { ...this.filters, ...filters }; // Spread in new filters
+        this.filters = { ...this.filters, ...filters };
         this.page = 1;
         this.fetchFilteredTrips();
         this.updateUrl();
@@ -156,7 +156,7 @@ export default {
         query.page = this.page;
       }
       if (this.filters.destination) {
-        query.destination = this.filters.destination; // Add the destination to the query
+        query.destination = this.filters.destination;
       }
       this.$router.push({ name: 'trips', query }).catch(err => {console.log(err)});
     },

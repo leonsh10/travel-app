@@ -140,13 +140,11 @@ export default {
     },
 
     selectTab(tabName) {
-      // Emit an event or use Vuex to update the main content area
       this.$emit("update:currentTab", tabName);
     },
     logout() {
-      this.$store.dispatch("logout", this.$router); // Assuming you have set up your logout action properly
+      this.$store.dispatch("logout", this.$router);
     },
-    // No need for selectTab if we're using router links
   },
 };
 </script>

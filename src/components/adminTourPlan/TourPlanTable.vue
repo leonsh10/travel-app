@@ -41,14 +41,26 @@
       ></tour-plan-dialog>
   
   
-      <!-- Delete Confirmation Dialog -->
-      <!-- ... -->
+      <v-dialog v-model="showDeleteDialog" max-width="300px">
+        {{ this.editableTourPlan }}
+      <v-card>
+        <v-card-title class="text-h5">Confirm Deletion</v-card-title>
+        <v-card-text>Are you sure you want to delete this trip?</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="grey" text @click="showDeleteDialog = false"
+            >Cancel</v-btn
+          >
+          <v-btn color="red" text @click="deleteTourPlan">Delete</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     </v-container>
   </template>
   
   <script>
   import TourPlanDialog from "./TourPlanDialog.vue";
-  import tourPlanService from "../../apiService/services/tourPlanService"; // Update the path as needed
+  import tourPlanService from "../../apiService/services/tourPlanService";
   
   export default {
     name: "TourPlanTable",
@@ -60,7 +72,7 @@
         currentTourPlan: {
           name: "",
           description: "",
-          days: [], // Array to hold the days of the tour plan
+          days: [],
         },
         editableTourPlan: {},
         showAddDialog: false,
@@ -81,38 +93,33 @@
       async getTourPlans() {
         try {
           const response = await tourPlanService.getAllTourPlans();
-          this.tourPlans = response.data; // Adjust according to your API response structure
+          this.tourPlans = response.data; 
         } catch (error) {
           console.error(error);
-          // Handle error (e.g., using a toast notification or setting an error message in data)
         }
       },
       openEditDialog(tourPlan) {
       this.editableTourPlan = Object.assign({}, tourPlan);
       this.showEditDialog = true;
-      this.$refs.tourPlanDialog.initializeDialog(); // Call initializeDialog when opening the dialog
+      this.$refs.tourPlanDialog.initializeDialog();
     },
-
+    openDeleteDialog(tour) {
+      this.editableTourPlan = tour;
+      this.showDeleteDialog = true;
+    },
     openAddDialog() {
       this.showAddDialog = true;
-      this.$refs.addTourPlanDialog.initializeDialog(); // Call initializeDialog for the add dialog
+      this.$refs.addTourPlanDialog.initializeDialog(); 
     },
       async saveTourPlan(tourPlanData) {
         if (this.editableTourPlan && this.editableTourPlan.id) {
-          // Update existing tour plan
           await tourPlanService.updateTourPlan(this.editableTourPlan.id, tourPlanData);
         } else {
-          // Create new tour plan
           await tourPlanService.createTourPlan(tourPlanData);
         }
         this.getTourPlans();
         this.showAddDialog = false;
         this.showEditDialog = false;
-      },
-      async deleteTourPlan() {
-        await tourPlanService.deleteTourPlan(this.editableTourPlan.id);
-        this.getTourPlans();
-        this.showDeleteDialog = false;
       },
       resetCurrentTourPlan() {
         this.currentTourPlan = {
@@ -120,7 +127,18 @@
           description: "",
           days: [],
         };
-      }
+      },
+      async deleteTourPlan(){
+      await tourPlanService.deleteTourPlan(this.editableTourPlan.id).then(() =>{
+        this.$toast.success('Tour plan deleted succesfully.');
+        this.getTourPlans();
+      }).catch(() =>{
+        this.$toast.error('Tour plan deleted failed.');
+      }).finally(() =>{
+        this.editableTourPlan = null;
+        this.showDeleteDialog = false;
+      })
+    },
     },
   };
   </script>

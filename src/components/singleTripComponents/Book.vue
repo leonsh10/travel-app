@@ -115,7 +115,6 @@ export default {
     this.stripePromise = loadStripe("pk_test_51ODtxZINlcfGJ7KFg1rYd8hJSZEmig2Ab0PnQE6ZofgNul0RsRTBLQUIf5JRiuzIvt2JRlHiyaAb0cVBCc4BJQKh00R9TpmzKR");
   },
   mounted() {
-    // Check if redirected from Stripe Checkout with session_id
     const session_id = this.$route.query.session_id;
     if (session_id) {
       this.finalizeReservation(session_id);
@@ -138,13 +137,13 @@ export default {
         const sessionId = response.data.id;
         const stripe = await this.stripePromise;
         const reservationDetails = {
-        name: this.name, // Customer's name
-        email: this.email, // Customer's email
-        phone: this.phone, // Customer's phone number
-        date: this.date, // Date of the booking
-        numberOfTickets: this.numberOfTickets, // Number of tickets booked
-        message: this.message, // Additional message or notes
-        tripId: this.trip._id, // ID of the trip being booked
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        date: this.date, 
+        numberOfTickets: this.numberOfTickets, 
+        message: this.message, 
+        tripId: this.trip._id, 
       };
         localStorage.setItem('reservationDetails', JSON.stringify(reservationDetails));
         await stripe.redirectToCheckout({ sessionId });

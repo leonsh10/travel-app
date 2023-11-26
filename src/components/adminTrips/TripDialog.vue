@@ -237,11 +237,9 @@ export default {
   data() {
     return {
       trip2: {
-        // ...other trip properties...
         cardImageFile: null,
         landingImageFile: null,
         galleryImagesFiles: [],
-        // ...other properties to store the file names...
       },
       categories: ["Adventure", "Beach", "Sea", "Eco", "Luxury"],
       menuDeparture: false,
@@ -305,13 +303,12 @@ export default {
     },
   },
   methods: {
-    // ... existing methods ...
     handleDepartureTime(time) {
       if (time) {
         const date = this.departureDate || this.getDefaultDate();
         this.trip.departureTime = `${date}T${time}`;
         this.menuDeparture = false;
-        this.menuTimeDeparture = false; // Close the time picker
+        this.menuTimeDeparture = false;
       }
     },
     handleReturnTime(time) {
@@ -319,11 +316,10 @@ export default {
         const date = this.returnDate || this.getDefaultDate();
         this.trip.returnTime = `${date}T${time}`;
         this.menuReturn = false;
-        this.menuTimeReturn = false; // Close the time picker
+        this.menuTimeReturn = false;
       }
     },
     getDefaultDate() {
-      // This method returns today's date as a string in 'YYYY-MM-DD' format
       const today = new Date();
       return today.toISOString().split("T")[0];
     },
@@ -332,7 +328,6 @@ export default {
       this.$emit("update:value", false);
     },
     save() {
-      // Your existing save method
       this.$emit('save', this.trip);
     },
 

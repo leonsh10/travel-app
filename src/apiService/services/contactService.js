@@ -10,7 +10,6 @@ const contactService = {
   deleteContact(contactId) { 
     return apiService.delete(`/contact/delete/${contactId}`); 
   }
-  // Add more user related methods here
 };
 
 export default contactService;

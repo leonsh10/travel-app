@@ -16,7 +16,6 @@ const tourPlanService = {
   deleteTourPlan(tourPlanId) {
     return apiService.delete(`/tourplans/${tourPlanId}`);
   },
-  // Add more tour plan related methods here if needed
 };
 
 export default tourPlanService;

@@ -43,7 +43,6 @@ export default {
           author: "John Turner",
         },
         { quote: "Another testimonial text...", author: "Jane Doe" },
-        // Add more testimonials here
       ],
     };
   },
@@ -52,7 +51,6 @@ export default {
 
 <style>
 .testimonial-text {
-  /* Your styles for the testimonial text */
   font-size: 30px;
   font-style: italic;
   color: #ffffff;

@@ -75,14 +75,14 @@ export default {
         category: "",
         shortDescription: "",
         largeDescription: "",
-        location: "", // This should be a link to a Google Maps iframe
+        location: "",
         price: 0,
         departureTime: "",
         returnTime: "",
-        includes: [], // This will hold selections like "5 Star Accommodation"
-        likes: 0, // Starting at 0, as it's not user-editable
-        availability: 10, // Default availability
-        sale: 0, // Percentage of the sale
+        includes: [],
+        likes: 0,
+        availability: 10,
+        sale: 0,
         cardImage: "",
         landingImage: "",
         galleryImages: [],
@@ -94,14 +94,14 @@ export default {
         category: "",
         shortDescription: "",
         largeDescription: "",
-        location: "", // This should be a link to a Google Maps iframe
+        location: "",
         price: 0,
         departureTime: "",
         returnTime: "",
-        includes: [], // This will hold selections like "5 Star Accommodation"
-        likes: 0, // Starting at 0, as it's not user-editable
-        availability: 10, // Default availability
-        sale: 0, // Percentage of the sale
+        includes: [],
+        likes: 0,
+        availability: 10,
+        sale: 0,
         cardImage: "",
         landingImage: "",
         galleryImages: [],
@@ -159,7 +159,6 @@ export default {
    
     async saveTrip(tripData) {
       if (this.editing) {
-        // Logic to handle updating an existing trip
         await tripService
           .editTrip(tripData._id, tripData)
           .then(() => {
@@ -175,7 +174,6 @@ export default {
             this.editing = false;
           });
       } else {
-        // Logic to handle adding a new trip
         await tripService
           .addTrip(tripData)
           .then(() => {

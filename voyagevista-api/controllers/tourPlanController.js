@@ -79,7 +79,6 @@ const tourPlanController = {
             .input('TripId', sql.NVarChar, tripId._id)
             .input('City', sql.NVarChar, tripId.city)
             .query('INSERT INTO TourPlans (Id,TripId, City) OUTPUT INSERTED.Id VALUES (@Id, @TripId, @City)');
-            // console.log(tourPlanResult);
             const tourPlanId = tourPlanResult.recordset[0].Id;
             console.log('tourPlanId',tourPlanId);
             let dayNumber = 1;
@@ -152,11 +151,11 @@ const tourPlanController = {
             await transaction.begin();
 
             await transaction.request()
-                .input('TourPlanId', sql.Int, id)
+                .input('TourPlanId', sql.NVarChar, id)
                 .query('DELETE FROM TourPlanDays WHERE TourPlanId = @TourPlanId');
 
             await transaction.request()
-                .input('Id', sql.Int, id)
+                .input('Id', sql.NVarChar, id)
                 .query('DELETE FROM TourPlans WHERE Id = @Id');
 
             await transaction.commit();

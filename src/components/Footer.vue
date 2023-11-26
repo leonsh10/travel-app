@@ -35,18 +35,14 @@
 export default {
   name: 'Footer',
   methods: {
-    // Dummy method for routing, replace with your routing logic
     routeTo(page) {
-      // Use Vue Router's push method or another routing method you prefer
       this.$router.push({ name: page });
     },
-    // Dummy method for social media redirects
     goTo(platform) {
       const urls = {
         instagram: 'https://www.instagram.com',
         facebook: 'https://www.facebook.com',
         twitter: 'https://www.twitter.com',
-        // Add other platforms here
       };
       window.open(urls[platform], '_blank');
     }

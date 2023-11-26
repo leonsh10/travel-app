@@ -5,7 +5,6 @@
       :items="reservations"
       class="elevation-1"
     >
-      <!-- Display Reservation Status -->
       <template v-slot:item.status="{ item }">
         <v-chip :color="statusColor(item.status)" dark>{{
           item.status
@@ -16,7 +15,6 @@
         {{ calculateTotalCost(item).toFixed(2) }}
       </template>
 
-      <!-- Actions Column -->
       <template v-slot:item.action="{ item }">
         <v-btn icon color="blue" @click="openEditDialog(item)">
           <v-icon>mdi-pencil</v-icon>
@@ -27,7 +25,6 @@
       </template>
     </v-data-table>
 
-    <!-- Edit Status Dialog -->
     <v-dialog v-model="editDialog" persistent max-width="300px">
       <v-card>
         <v-card-title>Edit Reservation Status</v-card-title>
@@ -59,24 +56,22 @@ import reservationService from "../../../apiService/services/reservationService"
 export default {
   data() {
     return {
-      // ...other data properties
       reservationHeaders: [
         { text: "Name", value: "name" },
         { text: "Email", value: "email" },
         { text: "Trip City", value: "tripId.city" },
         { text: "Number of Tickets", value: "numberOfTickets" },
-        { text: "Total Cost", value: "totalCost" }, // Add this column
+        { text: "Total Cost", value: "totalCost" },
         { text: "Status", value: "status" },
         { text: "Actions", value: "action", sortable: false },
       ],
       reservations: [],
       editDialog: false,
-      editableReservation: {}, // Initialize with an empty object
+      editableReservation: {}, 
       statusOptions: ["pending", "completed", "cancelled"],
     };
   },
   computed: {
-    // Calculate total cost for each reservation
     totalCost() {
       return this.reservations.map((reservation) => {
         const tripPrice = reservation.tripId.effectivePrice;
@@ -117,8 +112,8 @@ export default {
           }
         );
         if (response.data) {
-          this.fetchReservations(); // Refresh the list to show updated status
-          this.editDialog = false; // Close the dialog
+          this.fetchReservations();
+          this.editDialog = false;
         }
       } catch (error) {
         console.error("Error updating reservation status:", error);
@@ -127,13 +122,12 @@ export default {
     async deleteReservation(reservationId) {
       try {
         await reservationService.deleteReservation(reservationId);
-        this.fetchReservations(); // Refresh the reservations list
+        this.fetchReservations(); 
       } catch (error) {
         console.error("Error deleting reservation:", error);
       }
     },
     statusColor(status) {
-      // Return color based on status
       switch (status) {
         case "pending":
           return "orange";
@@ -145,8 +139,6 @@ export default {
           return "grey";
       }
     },
-    // Other methods like validate, bookTour, finalizeReservation, etc.
   },
-  // computed, mounted, etc.
 };
 </script>

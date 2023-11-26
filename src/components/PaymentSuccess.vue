@@ -35,14 +35,12 @@ import reservationService from "../apiService/services/reservationService";
 },
     methods: {
       goHome() {
-        this.$router.push('/'); // Redirect to home page or any other page
+        this.$router.push('/');
       },
       async finalizeReservation(sessionId) {
     try {
-      // Retrieve reservation details from the Vuex store
       this.reservationDetails = JSON.parse(localStorage.getItem('reservationDetails'));
 
-      // Verify the payment with the backend
       const verificationResponse = await reservationService.verifyPayment(sessionId);
       if (!verificationResponse.data.success) {
         throw new Error('Payment verification failed');

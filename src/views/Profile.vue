@@ -63,7 +63,6 @@ export default {
         const email = this.$store.state.auth.user.email;
         console.log("tokeeen", token);
         if (!token || !email) {
-          // Handle the case where the token or email is missing
           console.error("Token or email is missing.");
           return;
         }

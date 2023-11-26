@@ -30,7 +30,7 @@
     },
     methods: {
       tryAgain() {
-        this.$router.push('/trips'); // Redirect to booking page or any other page
+        this.$router.push('/trips');
       },
     },
   };
