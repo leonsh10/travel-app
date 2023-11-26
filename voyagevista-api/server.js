@@ -16,8 +16,8 @@ poolPromise.then(() => {
   app.use('/api/auth', authRoutes);
   app.use('/api/contact', contactRoutes);
   app.use('/api/trips', tripRoutes);
-  app.use('/api/reservations', reservationRoutes);
-  app.use('/api/users', userRoutes);
+  app.use('/api/reservation', reservationRoutes);
+  app.use('/api/user', userRoutes);
   app.use('/api/tourplans', tourPlanRoutes);
 
   const PORT = process.env.PORT || 5000;

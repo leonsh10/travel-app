@@ -35,6 +35,7 @@
             :rules="dateRules"
             v-model="date"
             required
+            disabled
           ></v-text-field>
 
           <v-text-field
@@ -119,6 +120,10 @@ export default {
     if (session_id) {
       this.finalizeReservation(session_id);
     }
+    setTimeout(() =>{
+      const d = new Date(this.trip.departureTime).toISOString().split('T')[0].split('-');
+      this.date = `${d[2]}-${d[1]}-${d[0]}`
+    },550)
   },
   methods: {
     validate() {

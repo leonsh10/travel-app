@@ -12,7 +12,6 @@
         <v-container>
           <v-row>
             <v-col cols="12">
-              {{ this.tourPlanData }}
               <v-select
                 label="Select Trip"
                 v-model="selectedTripId"

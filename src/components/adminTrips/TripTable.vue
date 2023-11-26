@@ -137,11 +137,17 @@ export default {
       this.showDeleteDialog = true;
     },
     openPreviewDialog(trip) {
-      this.editableTrip = trip;
-      this.showPreviewDialog = true;
+      if (trip && trip._id && trip.availability) {
+        this.$router.push(`/trip/${trip._id}`);
+      }
+      // this.editableTrip = trip;
+      // this.showPreviewDialog = true;
     },
     async getTrips() {
-      const { data } = await tripService.getTrips();
+      const { data } = await tripService.getTrips({
+        page: 1,
+          limit: 1000,
+      });
       this.trips = data.trips;
     },
 

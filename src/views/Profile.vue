@@ -35,6 +35,10 @@
           >
             <popular-destinations-card :trip="trip.tripId" />
           </v-col>
+
+          <v-col v-if="!reservedTrips.length" cols="12">
+            You don't have any reservation!
+          </v-col>
         </v-row>
       </v-col>
     </v-row>

@@ -5,8 +5,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 function calculateAmount({ effectivePrice, numberOfTickets }) {
   const basePrice = effectivePrice * numberOfTickets;
 
-  const taxAmount = basePrice * 0.18;
-
+  const taxAmount = basePrice * 0.18; // 18% tax
   const finalAmount = basePrice + taxAmount;
   const finalAmountInCents = Math.round(finalAmount * 100);
 
@@ -68,7 +67,6 @@ exports.createCheckoutSession = async (req, res) => {
     try {
       const Trip = require('../models/TripSchema');
       const { name, email, phone, date, numberOfTickets, message, tripId } = req.body;
-      console.log('save reservation called', req.body);
   
       const trip = await Trip.findById(tripId);
       if (!trip) {
@@ -95,6 +93,7 @@ exports.createCheckoutSession = async (req, res) => {
       await trip.save();
   
       await reservation.save();
+  
       res.status(201).json({ message: 'Reservation saved successfully', reservation });
     } catch (error) {
       res.status(500).json({ message: 'Failed to save reservation', error: error.message });
@@ -140,7 +139,7 @@ exports.deleteReservation = async (req, res) => {
     if (!reservation) {
       return res.status(404).json({ message: 'Reservation not found' });
     }
-    res.status(204).json(); 
+    res.status(204).json();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -149,7 +148,7 @@ exports.deleteReservation = async (req, res) => {
 
 exports.updateReservationStatus = async (req, res) => {
     try {
-      const { status } = req.body; 
+      const { status } = req.body;
       const reservation = await Reservation.findByIdAndUpdate(req.params.id, { status }, { new: true });
   
       if (!reservation) {

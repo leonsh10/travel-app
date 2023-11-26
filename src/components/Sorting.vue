@@ -21,8 +21,6 @@ export default {
       sortOptions: [
         { text: 'Price: High to Low', value: 'price-desc' },
         { text: 'Price: Low to High', value: 'price-asc' },
-        { text: 'Newest', value: 'newest' },
-        { text: 'Oldest', value: 'oldest' },
       ],
     };
   },
