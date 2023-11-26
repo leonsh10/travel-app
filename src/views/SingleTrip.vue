@@ -87,7 +87,7 @@ export default {
       { title: "Tour Plan", id: 1, component: "TourPlan" },
       { title: "Location", id: 2, component: "Location" },
       { title: "Gallery", id: 3, component: "Gallery" },
-      { title: "Reviews", id: 4, component: "Reviews" },
+      // { title: "Reviews", id: 4, component: "Reviews" },
     ],
     activeIndex: 0,
   }),

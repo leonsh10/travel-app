@@ -1,6 +1,6 @@
 <template>
     <div class="timeline-container">
-      <v-timeline align-top dense>
+      <v-timeline align-top dense v-if="!loader && this.events.length">
         <v-timeline-item
           v-for="event in events"
           :key="event.id"
@@ -9,50 +9,48 @@
         >
           <template v-slot:icon>
             <v-avatar size="69px" color="teal lighten-2">
-              <span class="headline white--text">{{ event.id }}</span>
+              <span class="headline white--text">{{ event.DayNumber }}</span>
             </v-avatar>
           </template>
   
           <div class="timeline-content">
-            <h3 class="title">{{ event.title }}</h3>
-            <p class="description">{{ event.description }}</p>
+            <h3 class="title">{{ `Day ${event.DayNumber}: ${event.Title}` }}</h3>
+            <p class="description">{{ event.Description }}</p>
           </div>
         </v-timeline-item>
       </v-timeline>
+      <v-progress-circular
+      indeterminate
+      color="green"
+      :size="99"
+      v-if="loader"
+    ></v-progress-circular>
+    <div v-if="!loader && !this.events.length">No Plan for this Trip. Sorry:(</div>
     </div>
   </template>
   
   <script>
+import tourPlanService from '../../apiService/services/tourPlanService'
   export default {
+    props:{
+      trip:{
+        default: Object
+      }
+    },
     data: () => ({
+      loader:false,
       events: [
-        {
-          id: 1,
-          title: 'Day 1: Departure',
-          description: 'Nullam ac justo efficitur, tristique ligula a, pellentesque ipsum. Quisque augue ipsum, vehicula et tellus nec, maximus viverra metus. Nullam elementum nibh nec pellentesque finibus. Suspendisse laoreet velit at eros eleifend, a pellentesque urna ornare. In sed viverra dui. Duis ultricies mi sed lorem blandit, non sodales sapien fermentum. Donec ultricies, turpis a sagittis suscipit, ex odio volutpat sem, vel molestie ligula enim varius est. Pellentesque sodales ipsum nisi. Suspendisse ultrices nulla eu volutpat volutpat. Nunc vestibulum, tortor sollicitudin dapibus egestas, lorem eros vestibulum turpis, ac condimentum erat ipsum rutrum dolor.Donec blandit nisi ut congue rutrum. Vestibulum enim velit, semper hendrerit tristique non, malesuada auctor nulla.',
-          color: 'teal'
-        },
-        {
-          id: 2,
-          title: 'Day 2: Adventure Begins',
-          description: 'Lorem ipsum dolor sit amet, consectetuer. Proin gravida nibh vel velit auctor aliqueenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.',
-          color: 'teal'
-        },
-        {
-          id: 3,
-          title: 'Day 3: Historical Tour',
-          description: 'Nullam ac justo efficitur, tristique ligula a, pellentesque ipsum. Quisque augue ipsum, vehicula et tellus nec, maximus viverra metus. Nullam elementum nibh nec pellentesque finibus. Suspendisse laoreet velit at eros eleifend, a pellentesque urna ornare. In sed viverra dui. Duis ultricies mi sed lorem blandit, non sodales sapien fermentum. Donec ultricies, turpis a sagittis suscipit, ex odio volutpat sem, vel molestie ligula enim varius est. Pellentesque sodales ipsum nisi. Suspendisse ultrices nulla eu volutpat volutpat. Nunc vestibulum, tortor sollicitudin dapibus egestas, lorem eros vestibulum turpis, ac condimentum erat ipsum rutrum dolor.Donec blandit nisi ut congue rutrum. Vestibulum enim velit, semper hendrerit tristique non, malesuada auctor nulla.',
-          color: 'teal'
-        },
-        {
-          id: 4,
-          title: 'Day 4: Return',
-          description: 'Lorem ipsum dolor sit amet, consectetuer. Proin gravida nibh vel velit auctor aliqueenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.',
-          color: 'teal'
-        },
-        // ... more events
       ]
-    })
+    }),
+    async mounted(){
+      this.loader = true;
+      const {data} = await tourPlanService.getTourPlanById(this.trip._id).finally(() => {
+        setTimeout(() =>{
+          this.loader = false
+        },1150)
+      });
+      this.events = data.days;
+    }
   }
   </script>
   

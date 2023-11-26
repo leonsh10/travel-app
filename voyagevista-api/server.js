@@ -1,20 +1,31 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const connectDB = require('./db');
-const { authRoutes,contactRoutes,tripRoutes, reservationRoutes, userRoutes } = require('./routes');
+const { connectMongoDB, poolPromise } = require('./db'); // Destructure the exported members
+const { authRoutes, contactRoutes, tripRoutes, reservationRoutes, userRoutes, tourPlanRoutes } = require('./routes');
+
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-connectDB();
+// Connect to MongoDB
+connectMongoDB();
 
-app.use('/api/auth', authRoutes);
-app.use('/api/contact', contactRoutes);
-app.use('/api/trips', tripRoutes);
-app.use('/api/reservation', reservationRoutes);
-app.use('/api/user', userRoutes);
-// Use other routes here
+// Wait for the SQL Server connection to be established
+poolPromise.then(() => {
+  console.log('SQL Server connection established');
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  // Now that both databases are connected, set up the routes and start the server
+  app.use('/api/auth', authRoutes);
+  app.use('/api/contact', contactRoutes);
+  app.use('/api/trips', tripRoutes);
+  app.use('/api/reservations', reservationRoutes);
+  app.use('/api/users', userRoutes);
+  app.use('/api/tourplans', tourPlanRoutes);
+
+  // Start the server
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}).catch(err => {
+  console.error('SQL Server connection failed', err);
+});

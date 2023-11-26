@@ -3,19 +3,25 @@
     <v-col cols="12" style="margin-bottom: 30px;">
       <v-row class="title-row">
         <span class="main-title">{{trip.city}}</span>
-        <span class="price-info">
-          ${{ trip.price }}
+        <span class="price-info" :class="{'discount': trip.sale > 0}">
+          <span>${{ trip.price }}</span>
+          <span class="discount-price" v-if="trip.sale > 0"> ${{ trip.effectivePrice }}</span>
           <span class="per-person">/per person</span>
         </span>
       </v-row>
 
       <v-row class="description-row">
-        <span class="main-description">
-          {{ trip.shortDescription }}
-        </span>
-        <span class="secondary-description">
+        <v-col cols="12">
+
+          <span class="main-description">
+            {{ trip.shortDescription }}
+          </span>
+        </v-col>
+        <v-col cols="12">
+          <span class="secondary-description">
           {{ trip.largeDescription }}
         </span>
+        </v-col>
       </v-row>
 
       <v-row style="margin: 0; margin-top: 15px !important">
@@ -42,6 +48,14 @@
             </v-col>
             <v-col cols="6">
                 <span class="departure-location">{{ trip.city }}</span>
+            </v-col>
+        </v-row>
+        <v-row class="departure-info">
+            <v-col cols="6">
+                <span class="departure-title">Hotel</span>
+            </v-col>
+            <v-col cols="6">
+                <span class="departure-location">{{ trip.hotel }}</span>
             </v-col>
         </v-row>
 
@@ -75,7 +89,7 @@
             </v-col>
         </v-row>
 
-        <v-row class="departure-info">
+        <!-- <v-row class="departure-info">
             <v-col cols="6">
                 <span class="departure-title">Not Included</span>
             </v-col>
@@ -84,7 +98,7 @@
                 <span class="departure-location"><v-icon color="red">mdi-close</v-icon> {{'not included'}}</span>
               </v-col>
             </v-col>
-        </v-row>
+        </v-row> -->
         
       </v-row>
     </v-col>
@@ -130,6 +144,16 @@ export default({
   line-height: 26px;
 }
 
+.price-info.discount span:first-child{
+  font-size: 22px;
+  text-decoration:line-through;
+}
+
+.discount-price{
+  font-size: 26px;
+  margin-left: 12px;
+}
+
 .per-person {
   line-height: normal;
   display: flex;
@@ -142,6 +166,10 @@ export default({
 
 .description-row {
   margin: 0;
+}
+
+.description-row .col{
+  padding:10px 0px;
 }
 
 .main-description {
@@ -169,7 +197,9 @@ export default({
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
   transition: color 0.2s ease-out;
+
 }
+
 
 .departure-info:not(:first-of-type) {
   border-top: none;

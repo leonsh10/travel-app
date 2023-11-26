@@ -3,6 +3,7 @@ const contactRoutes = require('./contactRoutes');
 const tripRoutes = require('./tripRoutes');
 const reservationRoutes = require('./reservationRoutes');
 const userRoutes = require('./userRoutes');
+const tourPlanRoutes = require('./tourPlanRoutes');
 // Import other routes here
 
 module.exports = {
@@ -10,6 +11,7 @@ module.exports = {
   contactRoutes,
   tripRoutes,
   reservationRoutes,
-  userRoutes
+  userRoutes,
+  tourPlanRoutes
   // Export other routes here
 };

@@ -1,14 +1,14 @@
 <template>
     <v-container>
-      <TripGalleryTable />
+      <TourPlanTable />
     </v-container>
   </template>
   
   <script>
-  import TripGalleryTable from "../../../components/adminGalleryTrips/GalleryTripTable.vue";
+  import TourPlanTable from "../../../components/adminTourPlan/TourPlanTable.vue";
   export default {
     components: {
-        TripGalleryTable,
+        TourPlanTable,
     },
   };
   </script>

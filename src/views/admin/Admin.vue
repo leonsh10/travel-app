@@ -18,7 +18,7 @@
   import UsersComponent from './tabs/UsersComponent.vue';
   import ContactsComponent from './tabs/ContactsComponent.vue';
 import ReservationsComponent from './tabs/ReservationsComponent.vue';
-import TripsGalleries from './tabs/TripsGalleries.vue';
+import TourPlanComponent from './tabs/TourPlanComponent.vue';
   export default {
     components: {
       MainAdminPage,
@@ -26,7 +26,7 @@ import TripsGalleries from './tabs/TripsGalleries.vue';
       TripsComponent,
       UsersComponent,
       ContactsComponent,
-      TripsGalleries
+      TourPlanComponent
 
     },
     data() {
@@ -43,10 +43,10 @@ import TripsGalleries from './tabs/TripsGalleries.vue';
             return UsersComponent;
           case 'contacts':
             return ContactsComponent;
-            case 'reservations':
+          case 'reservations':
             return ReservationsComponent;
-            case 'galleries':
-            return TripsGalleries;
+          case 'tourplan':
+            return TourPlanComponent;
           default:
             return MainAdminPage;
         }

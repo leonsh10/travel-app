@@ -34,14 +34,17 @@
             <v-list-item-title class="white--text">Trips</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="selectTab('galleries')" class="sidebar-item">
+
+        <v-list-item @click="selectTab('tourplan')" class="sidebar-item">
           <v-list-item-icon>
             <v-icon class="white--text">mdi-airplane-takeoff</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="white--text">Trips Galleries</v-list-item-title>
+            <v-list-item-title class="white--text">Tour Plan</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+
 
         <v-list-item @click="selectTab('users')" class="sidebar-item">
           <v-list-item-icon>
