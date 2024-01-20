@@ -72,11 +72,11 @@
         </div>
         <div class="info-item">
           <v-icon class="info-icon" color="white">mdi-email</v-icon>
-          <strong>Email:</strong> info@voyagevista.com
+          <strong>Email:</strong> info@lshvista.com
         </div>
         <div class="info-item">
           <v-icon class="info-icon" color="white">mdi-web</v-icon>
-          <strong>Website:</strong> voyagevista.com
+          <strong>Website:</strong> lsh-vista.com
         </div>
       </v-col>
     </v-row>

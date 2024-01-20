@@ -1,8 +1,6 @@
 <template>
   <div>
-
     <v-navigation-drawer app v-model="drawer" v-if="$vuetify.breakpoint.smAndDown">
-      <!-- Navigation items for mobile -->
       <v-list dense>
         <v-list-item @click="goTo('home')">
           <v-list-item-title>Home</v-list-item-title>
@@ -20,10 +18,8 @@
       <v-container class="d-flex align-center" :class="{'pt-0 pb-0 pl-0 pr-0': $vuetify.breakpoint.smAndDown}">
         <v-app-bar-nav-icon v-if="$vuetify.breakpoint.smAndDown" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <!-- Logo -->
-        <img :src="require('@/assets/logoText.png')" alt="Logo" width="165" style="cursor:pointer; margin-right: 25px;" @click="goTo('home')" />
+        <img :src="require('@/assets/logo23.png')" alt="Logo" width="165" style="cursor:pointer; margin-right: 25px; height: 65px; object-fit:contain;" @click="goTo('home')" />
 
-        <!-- Search bar and other items for larger screens -->
         <template v-if="!$vuetify.breakpoint.smAndDown">
           <v-text-field
             solo-inverted

@@ -39,10 +39,10 @@ export default {
     return {
       testimonials: [
         {
-          quote: "Our family trip to the Indonesia was a dream come true. Every detail was perfectly organized, allowing us to soak in the stunning views and enjoy the local cuisine without a single worry. We've made memories that we'll cherish forever. Thank you for an unforgettable experience!",
+          quote: "Our family trip to the Indonesia was a dream come true. Every detail was perfectly organized. Thank you for an unforgettable experience!",
           author: "Emily Rivera",
         },
-        { quote: "I never thought a vacation could be so transformative until I took the solo journey to Bali with your tour. The balance of adventure and relaxation, the attention to detail, and the incredible guides made this more than just a trip—it was a journey of self-discovery.",
+        { quote: "I never thought a vacation could be so transformative until I took the solo journey to Bali with your tour.",
          author: "Alex Johnson" },
       ],
     };

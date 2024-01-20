@@ -12,7 +12,7 @@
           <img src="../assets/usefulIcons/heart.png" />
         </span>
       </div>
-      <div v-if="listing && trip.availability == 0" class="sold-out-image"></div> <!-- Use a div for the image -->
+      <div v-if="listing && trip.availability == 0" class="sold-out-image"></div>
     </v-col>
     <v-col cols="12" class="popular-destinations-infos">
       <span class="destination-card-country" @click="redirectToTrip">{{
@@ -22,8 +22,8 @@
         trip.shortDescription
       }}</span>
       <div class="mt-2">
-        <span v-if="trip.sale" class="destination-card-price mr-2"> ${{ calculateDiscountedPrice() }}</span>
-        <span class="destination-card-price" :class="{'onsale': trip.sale && trip.sale > 0}">${{ trip.price }}</span>
+        <span v-if="trip.sale" class="destination-card-price mr-2"> {{ calculateDiscountedPrice() }}€</span>
+        <span class="destination-card-price" :class="{'onsale': trip.sale && trip.sale > 0}">{{ trip.price }}€</span>
       </div>
       <div class="mt-1" v-if="status">
         <span>Status: {{ status.toUpperCase() }}</span>

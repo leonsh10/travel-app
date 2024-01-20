@@ -4,8 +4,8 @@
       <v-row class="title-row">
         <span class="main-title">{{trip.city}}</span>
         <span class="price-info" :class="{'discount': trip.sale > 0}">
-          <span>${{ trip.price }}</span>
-          <span class="discount-price" v-if="trip.sale > 0"> ${{ trip.effectivePrice }}</span>
+          <span>{{ trip.price }}€</span>
+          <span class="discount-price" v-if="trip.sale > 0"> {{ trip.effectivePrice }}€</span>
           <span class="per-person">/per person</span>
         </span>
       </v-row>

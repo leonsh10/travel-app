@@ -5,6 +5,7 @@ import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
 import Admin from '../views/admin/Admin.vue';
 import Profile from '../views/Profile.vue';
+import Unauthorized from '../views/Unauthorized.vue';
 import TripsListing from '../views/TripsListing.vue';
 import SingleTrip from '../views/SingleTrip.vue';
 import Login from '../components/auth/Login.vue';
@@ -16,6 +17,7 @@ Router.prototype.push = function push(location) {
    return originalPush.call(this, location).catch(err => err)
 }
 const routes = [
+  { path: '*', redirect: '/' },
   {
     path: '/',
     name: 'home',
@@ -48,6 +50,12 @@ const routes = [
     path: '/trips',
     name: 'trips',
     component: TripsListing
+  },
+
+  {
+    path: '/unauthorized',
+    name: 'unauthorized',
+    component: Unauthorized
   },
 
   {

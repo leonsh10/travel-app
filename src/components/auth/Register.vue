@@ -2,7 +2,7 @@
   <v-container class="fill-height">
     <v-row justify="center" align="center" class="fill-height">
       <v-col cols="12" md="6">
-        <img src="../../assets/logoNoBg.png" class="form-logo" alt="Logo">
+        <img src="../../assets/logo23.png" class="form-logo" alt="Logo">
         <v-card class="mx-auto fill-height no-shadow" max-width="344">
           <v-card-title class="justify-center text-subtitle-1" style="color: #667c99;">Create your account</v-card-title>
           <v-container>

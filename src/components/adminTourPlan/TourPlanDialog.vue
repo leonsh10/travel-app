@@ -79,7 +79,6 @@ export default {
       }
     },
     selectedTripId(newValue) {
-      console.log("herereee");
       this.tourPlan.tripId = newValue;
       this.onTripSelect();
     },
@@ -90,7 +89,6 @@ export default {
       setTimeout(() => {
         if (this.editing && this.tourPlanData) {
           this.tourPlan = this.tourPlanData;
-          console.log(this.tourPlan);
           this.selectedTripId = {
             _id: this.tourPlan.id,
             city: this.tourPlan.city
@@ -122,7 +120,6 @@ export default {
       }
     },
     onTripSelect() {
-      console.log("on trip selected", this.selectedTripId);
       this.selectedTrip = this.trips.find(
         (trip) => trip._id === this.selectedTripId._id
       );

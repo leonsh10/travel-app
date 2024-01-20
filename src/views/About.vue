@@ -6,7 +6,7 @@
           <h3 class="header-title">Making Journeys Memorable.</h3>
           <span class="about-header-span"
             >When it comes to travel, every detail matters. With
-            <strong>VOYAGEVISTA</strong>, you're not just reserving a trip;
+            <strong>LSH-VISTA</strong>, you're not just reserving a trip;
             you're crafting an experience. Dive into a world where every journey
             is tailored to perfection, ensuring memories that last a
             lifetime.</span
@@ -40,10 +40,10 @@
 
           <span class="second-about-header-second-span"
             >Unlocking the world, one trip at a time. With
-            <strong>VOYAGEVISTA</strong>, we're not just offering trips — we're
+            <strong>LSH-VISTA</strong>, we're not just offering trips — we're
             curating memories. In the era of digital wanderlust, choosing the
             perfect getaway has never been more overwhelming. We at
-            <strong>VOYAGEVISTA</strong> understand this. Our platform brings
+            <strong>LSH-VISTA</strong> understand this. Our platform brings
             together the charm of undiscovered locales and the comfort of
             tried-and-tested destinations. Whether you're a solo traveler
             seeking an adventure, a family planning a summer vacation, or a

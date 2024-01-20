@@ -24,7 +24,7 @@
       </v-row>
       <v-row>
         <v-col class="text-center white--text">
-          © 2023 VOYAGEVISTA
+          © 2024 LSH-VISTA
         </v-col>
       </v-row>
     </v-container>

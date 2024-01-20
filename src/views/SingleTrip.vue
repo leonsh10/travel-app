@@ -10,7 +10,7 @@
     </v-col>
     <v-col cols="12" class="footer-style">
       <v-container class="footer-container">
-        <span>Voyagevista / {{ trip.city }}</span>
+        <span>LSH-VISTA / {{ trip.city }}</span>
         <div class="social-media">
           <v-btn icon href="https://facebook.com" target="_blank">
             <v-icon> mdi-facebook </v-icon>
@@ -43,7 +43,6 @@
               class="tab-item-style"
             >
               <v-row class="ion-row-style">
-                <!-- Dynamically render the appropriate component based on the item.id -->
                 <component :is="getComponent(item.id)" :trip="trip"></component>
               </v-row>
             </v-tab-item>

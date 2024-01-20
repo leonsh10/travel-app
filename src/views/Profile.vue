@@ -17,7 +17,6 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
-          <!-- Any additional user information could go here -->
         </v-card>
       </v-col>
 
@@ -65,7 +64,6 @@ export default {
       try {
         const token = this.$store.state.auth.token;
         const email = this.$store.state.auth.user.email;
-        console.log("tokeeen", token);
         if (!token || !email) {
           console.error("Token or email is missing.");
           return;

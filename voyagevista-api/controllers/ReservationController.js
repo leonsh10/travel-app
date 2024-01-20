@@ -28,7 +28,7 @@ exports.createCheckoutSession = async (req, res) => {
           payment_method_types: ['card'],
           line_items: [{
               price_data: {
-                  currency: 'usd',
+                  currency: 'eur',
                   product_data: {
                       name: 'Tour Tickets',
                   },
@@ -48,7 +48,6 @@ exports.createCheckoutSession = async (req, res) => {
 };
 
   exports.verifyPayment = async (req, res) => {
-    console.log('verify paymentttt');
     const { sessionId } = req.body;
     try {
       const session = await stripe.checkout.sessions.retrieve(sessionId);
@@ -66,13 +65,15 @@ exports.createCheckoutSession = async (req, res) => {
   exports.saveReservation = async (req, res) => {
     try {
       const Trip = require('../models/TripSchema');
+      const Reservation = require('../models/ReservationSchema');
       const { name, email, phone, date, numberOfTickets, message, tripId } = req.body;
   
+      const formattedDate = date.split('-').reverse().join('-');
+    
       const trip = await Trip.findById(tripId);
       if (!trip) {
           return res.status(404).json({ message: 'Trip not found' });
       }
-
   
       if (trip.availability < numberOfTickets) {
         return res.status(400).json({ message: 'Not enough tickets available' });
@@ -83,7 +84,7 @@ exports.createCheckoutSession = async (req, res) => {
         name,
         email,
         phone,
-        date,
+        date: formattedDate,
         numberOfTickets,
         message,
         status: 'pending',

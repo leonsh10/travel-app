@@ -2,7 +2,7 @@
   <v-container class="fill-height">
     <v-row justify="center" align="center" class="fill-height">
       <v-col cols="12" md="6" style="max-width: 360px">
-        <img src="../../assets/logoNoBg.png" class="form-logo" alt="Logo" />
+        <img src="../../assets/logo23.png" class="form-logo" alt="Logo" />
 
         <v-form ref="form" @submit.prevent="handleSubmit" class="mt-3">
           <v-text-field
@@ -82,16 +82,13 @@ export default {
     async handleSubmit() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
-        console.log("Form is valid, submitting...");
         try {
           await this.$store.dispatch("login", {
             email: this.email,
             password: this.password,
           });
-          console.log("Login Successful!");
           this.$router.push({ path: "/" });
         } catch (error) {
-            console.log('error',error)
           if (error.response && error.response.data) {
             if (error.response.data.message === "Invalid Credentials") {
               this.$toast.error("Your account does not exist.");
@@ -112,7 +109,6 @@ export default {
       console.log("Forgot Password clicked");
     },
     registerNow() {
-      console.log("Register Now clicked");
       this.$router.push({ name: "register" });
     },
   },

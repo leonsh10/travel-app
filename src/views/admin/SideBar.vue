@@ -67,7 +67,6 @@
         <v-list-item @click="selectTab('reservations')" class="sidebar-item">
           <v-list-item-icon>
             <v-icon class="white--text">mdi-calendar-clock</v-icon>
-            <!-- Choose an icon that represents reservations -->
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title class="white--text"
@@ -111,7 +110,6 @@
           </v-list-item-content>
         </v-list-item>
 
-        <!-- Add more main site links as needed -->
       </v-list-group>
     </v-list>
 
@@ -120,7 +118,6 @@
       class="logout-list"
       style="position: absolute; width: 100%; bottom: 0"
     >
-      <!-- Optionally use a list item for semantic markup -->
       <v-list-item class="logout-button">
         <v-btn text block @click="logout" class="white--text">
           <v-icon left class="white--text">mdi-logout</v-icon>
@@ -179,17 +176,14 @@ export default {
   color: white;
 }
 
-/* Additional hover styles for list items */
 .v-list-item:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Style for the group title */
 .v-list-group__header {
   font-weight: 500;
 }
 
-/* Adjust padding for icons and content */
 .v-list-item__icon,
 .v-list-item__content {
   padding-right: 16px;

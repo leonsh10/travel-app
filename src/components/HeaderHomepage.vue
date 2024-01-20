@@ -40,10 +40,10 @@
 
         <!-- Logo -->
         <img
-          :src="require('@/assets/logoText.png')"
+          :src="require('@/assets/logo23.png')"
           alt="Logo"
           width="165"
-          style="cursor: pointer; margin-right: 25px"
+          style="cursor: pointer; margin-right: 25px;object-fit: contain; height: 60px;"
           @click="goTo('home')"
         />
 

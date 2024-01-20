@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <!-- User Management Table -->
     <v-card>
       <v-card-title class="headline">User Management</v-card-title>
       <v-data-table :headers="headers" :items="users" class="elevation-1">
@@ -15,7 +14,6 @@
       </v-data-table>
     </v-card>
 
-    <!-- Edit Role Dialog -->
     <v-dialog v-model="editDialog" persistent max-width="300px">
       <v-card>
         <v-card-title>Edit User Role</v-card-title>
@@ -39,7 +37,6 @@
       </v-card>
     </v-dialog>
 
-    <!-- Confirmation Dialog for Deletion -->
     <v-dialog v-model="deleteDialog" persistent max-width="300px">
       <v-card>
         <v-card-title class="headline">Confirm Deletion</v-card-title>
